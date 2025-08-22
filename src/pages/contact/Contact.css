@@ -1,0 +1,187 @@
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #000;
+  color: #fff;
+}
+
+.contact-content {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.profile-section {
+  padding: 2rem;
+}
+
+@keyframes spin {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.profile-image-container {
+  width: 350px;
+  height: 350px;
+  margin: 0 auto 4rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.profile-image-container {
+  position: relative;
+  border-radius: 16px;
+  padding: 4px;
+  background: transparent;
+}
+
+.profile-image-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 4px;
+  background: conic-gradient(
+    from var(--angle),
+    #000 0% 40%,
+    #fff 20% 80%,
+    #000 80% 20%
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile-image-container:hover::before {
+  opacity: 1;
+  animation: spin 2s linear infinite;
+}
+
+.profile-image-container:hover {
+  transform: scale(1.03);
+}
+
+.profile-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.profile-image-container:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Removed transform scaling on hover */
+
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0 0 1.5rem;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.description {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #ccc;
+  margin: 0 auto 3rem;
+  max-width: 600px;
+}
+
+.email-button {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.email-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.email-button:hover {
+  color: #000;
+}
+
+.email-button:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact-content {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+  
+  .description {
+    font-size: 1.1rem;
+    padding: 0 1rem;
+  }
+  
+  .profile-image-container {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .profile-image {
+    max-width: 100%;
+  }
+}
