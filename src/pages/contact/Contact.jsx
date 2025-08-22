@@ -24,12 +24,22 @@ const Contact = () => {
             I started my journey in computer science three years ago in game development, 
             and have been committed to sharing the joy of programming.
           </p>
-          <button 
-            className="email-button"
-            onClick={handleEmailClick}
-          >
-            Contact Me
-          </button>
+          <div className="button-group">
+            <button 
+              className="email-button"
+              onClick={handleEmailClick}
+            >
+              <i className="fas fa-envelope"></i> Proton
+            </button>
+            <a 
+              href="https://github.com/anb2473" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="email-button"
+            >
+              <i className="fab fa-github"></i> GitHub
+            </a>
+          </div>
         </div>
       </div>
     </div>
