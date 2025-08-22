@@ -1,9 +1,34 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import "./Home.css";
+import Features from "./Features";
 
 function Home() {
   const mountRef = useRef(null);
+  const [scrollY, setScrollY] = useState(0);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Calculate opacity and blur based on scroll position
+  const calculateStyles = () => {
+    const blurAmount = Math.min(scrollY / 20, 10); // Cap blur at 10px
+    const opacity = Math.max(1 - (scrollY / 300), 0); // Fade out over 300px
+    
+    return {
+      filter: `blur(${blurAmount}px)`,
+      opacity: opacity,
+      transition: 'all 0.3s ease-out',
+      transform: `translateY(${scrollY * 0.2}px)` // Slight parallax effect
+    };
+  };
 
   useEffect(() => {
     const mountEl = mountRef.current;
@@ -163,13 +188,20 @@ function Home() {
   }, []);
 
   return (
-    <div className="home-root">
-      <div ref={mountRef} className="canvas-container"></div>
-      <div className="home-content-left">
-        <h1>Welcome</h1>
-        <h2>to Skill Bytes</h2>
-        <button>Get Started</button>
+    <div className="home-container">
+      <div className="home-root" ref={mountRef}>
+        <div 
+          className="home-content-left" 
+          ref={contentRef}
+          style={calculateStyles()}
+        >
+          <h1>Welcome</h1>
+          <h2>to Skill Bytes</h2>
+          <button>Get Started</button>
+        </div>
       </div>
+      <div style={{ height: '100vh' }}></div> {/* Spacer for scrolling */}
+      <Features />
     </div>
   );
 }
