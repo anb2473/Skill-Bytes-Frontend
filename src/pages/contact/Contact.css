@@ -204,7 +204,7 @@ h1 {
   
   .profile-image {
     max-width: 100%;
-    filter: grayscale(100%) contrast(1.1);
+    filter: none;
   }
   
   .email-button {
