@@ -36,10 +36,6 @@
   pointer-events: none;
 }
 
-.signup-card:hover::before {
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
 /* Typography */
 .signup-card h1 {
   font-size: 1.75rem;
