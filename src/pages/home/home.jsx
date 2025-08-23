@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import * as THREE from "three";
 import "./Home.css";
 import Features from "./Features";
@@ -197,7 +198,7 @@ function Home() {
         >
           <h1>Welcome</h1>
           <h2>to Skill Bytes</h2>
-          <button>Get Started</button>
+          <Link to="/signup" className="get-started-button">Get Started</Link>
         </div>
       </div>
       <div style={{ height: '100vh' }}></div> {/* Spacer for scrolling */}

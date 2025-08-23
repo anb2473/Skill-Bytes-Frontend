@@ -4,8 +4,8 @@
   align-items: center;
   min-height: 100vh;
   padding: 2rem;
-  background-color: #000;
-  color: #fff;
+  background-color: #000000 !important;
+  color: #ffffff !important;
 }
 
 .contact-content {
@@ -69,12 +69,11 @@
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   z-index: 1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  display: none;
 }
 
 .profile-image-container:hover::before {
-  opacity: 1;
+  display: block;
   animation: spin 2s linear infinite;
 }
 
@@ -88,7 +87,8 @@
   height: 100%;
   border-radius: 12px;
   overflow: hidden;
-  background: white;
+  background: #000000;
+  border: none;
 }
 
 .profile-image {
@@ -106,20 +106,28 @@
 
 /* Removed transform scaling on hover */
 
+body {
+  margin: 0;
+  padding: 0;
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
 h1 {
   font-size: 3rem;
   font-weight: bold;
   margin: 0 0 1.5rem;
-  color: #fff;
   letter-spacing: -0.5px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .description {
   font-size: 1.2rem;
   line-height: 1.7;
-  color: #ccc;
+  color: #ffffff;
   margin: 0 auto 3rem;
   max-width: 600px;
+  opacity: 0.9;
 }
 
 .button-group {
@@ -180,19 +188,27 @@ h1 {
 
   h1 {
     font-size: 2.2rem;
+    color: #fff;
   }
   
   .description {
     font-size: 1.1rem;
     padding: 0 1rem;
+    color: #ccc;
   }
   
   .profile-image-container {
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
   }
   
   .profile-image {
     max-width: 100%;
+    filter: grayscale(100%) contrast(1.1);
+  }
+  
+  .email-button {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
   }
 }

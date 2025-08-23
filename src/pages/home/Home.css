@@ -57,7 +57,8 @@
   margin: 0 0 1.5rem 0;
 }
 
-.home-content-left button {
+.home-content-left .get-started-button {
+  display: inline-block;
   padding: 0.75rem 2rem;
   font-size: 1.25rem;
   font-weight: 600;
@@ -65,12 +66,14 @@
   background: #111;
   border: 2px solid #fff;
   border-radius: 8px;
+  text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.home-content-left button:hover {
+.home-content-left .get-started-button:hover {
   background: #fff;
   color: #000;
   transform: scale(1.05);
+  text-decoration: none;
 }

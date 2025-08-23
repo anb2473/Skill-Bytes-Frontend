@@ -48,21 +48,49 @@
 .nav-links a {
   position: relative;
   text-decoration: none;
+  padding: 0.5rem 0;
   color: var(--link);
-  font-weight: 500;
-  padding: 0.25rem 0;
-  transition: color 0.25s ease;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--link-hover);
 }
 
 .nav-links a::after {
-  content: "";
+  content: '';
   position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0%;
+  width: 0;
   height: 2px;
-  background: var(--accent);
+  bottom: 0;
+  left: 0;
+  background-color: var(--accent);
   transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Sign Up Link */
+.nav-links .signup-link {
+  background-color: var(--accent);
+  color: var(--bg) !important;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.nav-links .signup-link::after {
+  display: none;
+}
+
+.nav-links .signup-link:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-1px);
+  color: var(--bg) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .nav-links a:hover {
