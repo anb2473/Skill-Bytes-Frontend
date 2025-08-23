@@ -14,7 +14,7 @@ const Contact = () => {
           <div className="profile-image-wrapper">
             <img 
               src="/profile.jpg" 
-              alt="Profile" 
+              alt="" 
               className="profile-image"
             />
           </div>
