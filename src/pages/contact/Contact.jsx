@@ -29,7 +29,7 @@ const Contact = () => {
               className="email-button"
               onClick={handleEmailClick}
             >
-              <i className="fas fa-envelope"></i> Proton
+              <i className="fas fa-envelope"></i> Email
             </button>
             <a 
               href="https://github.com/anb2473" 
