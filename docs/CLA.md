@@ -2,7 +2,7 @@
 
 Thank you for contributing to this project!
 
-To keep things simple and legally clear, all contributions to this repository are assigned to the project maintainer, [Your Name].  
+To keep things simple and legally clear, all contributions to this repository are assigned to the project maintainer, Austin Blass.
 
 This means:
 - You keep credit for your work (your name will remain on commits, and you can show your code in portfolios).  
