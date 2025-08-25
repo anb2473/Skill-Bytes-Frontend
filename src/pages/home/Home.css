@@ -21,6 +21,7 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+  pointer-events: none; /* Makes the canvas non-interactive */
 }
 
 .canvas-container > canvas {
@@ -30,18 +31,29 @@
 }
 
 /* Left-aligned overlay content */
-.home-content-left {
-  position: fixed;
-  top: 50%;
-  left: 10%;
-  transform: translateY(-50%);
+.home-content-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 10%;
+}
+
+.home-content-left {
+  position: relative;
+  z-index: 3;
   color: #fff;
   text-align: left;
   pointer-events: auto;
-  width: 80%;
   max-width: 800px;
-  will-change: transform, filter, opacity; /* Optimize for animations */
+  will-change: transform, filter, opacity;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
 
 .home-content-left h1 {

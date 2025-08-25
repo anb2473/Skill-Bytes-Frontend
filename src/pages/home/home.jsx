@@ -191,14 +191,16 @@ function Home() {
   return (
     <div className="home-container">
       <div className="home-root" ref={mountRef}>
-        <div 
-          className="home-content-left" 
-          ref={contentRef}
-          style={calculateStyles()}
-        >
-          <h1>Welcome</h1>
-          <h2>to Skill Bytes</h2>
-          <Link to="/signup" className="get-started-button">Get Started</Link>
+        <div className="home-content-container">
+          <div 
+            className="home-content-left" 
+            ref={contentRef}
+            style={calculateStyles()}
+          >
+            <h1>Welcome</h1>
+            <h2>to Skill Bytes</h2>
+            <Link to="/signup" className="get-started-button">Get Started</Link>
+          </div>
         </div>
       </div>
       <div style={{ height: '100vh' }}></div> {/* Spacer for scrolling */}
