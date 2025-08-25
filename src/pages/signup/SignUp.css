@@ -90,6 +90,18 @@
   padding-left: 0.5rem;
 }
 
+/* Error message styling */
+.error-message {
+  background-color: rgba(255, 59, 48, 0.1);
+  color: #ff3b30;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  text-align: left;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
 /* Button styling */
 .continue-button {
   width: 100%;

@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './SignUp.css';
 
+const BACKEND_URL = 'http://localhost:3000';
+
 const SignUp = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    username: '',
     email: '',
     password: ''
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,18 +22,40 @@ const SignUp = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // Here you would typically make an API call to your backend
-    console.log('Sign up with:', formData);
-    
-    // Simulate API call
-    setTimeout(() => {
+    setError('');
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/auth/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          username: formData.username,
+          email: formData.email,
+          passw: formData.password
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.err || 'Signup failed');
+      }
+
+      // Redirect to dashboard on successful signup
+      navigate('/dashboard');
+
+    } catch (err) {
+      setError(err.message || 'An error occurred during signup');
+      console.error('Signup error:', err);
+    } finally {
       setIsLoading(false);
-      // Handle successful signup (e.g., redirect to dashboard)
-    }, 1000);
+    }
   };
 
   return (
@@ -38,6 +65,21 @@ const SignUp = () => {
         <p className="subtitle">Start your journey with us</p>
         
         <form onSubmit={handleSubmit} className="signup-form">
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              placeholder="Choose a username"
+              required
+              minLength="3"
+              maxLength="30"
+            />
+          </div>
+          
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -67,6 +109,11 @@ const SignUp = () => {
             />
           </div>
           
+          {error && (
+            <div className="error-message">
+              {error}
+            </div>
+          )}
           <button 
             type="submit" 
             className="continue-button"

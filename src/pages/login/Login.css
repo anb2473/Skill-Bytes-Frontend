@@ -46,6 +46,23 @@
   text-align: left;
 }
 
+.error-message {
+  background-color: rgba(255, 59, 48, 0.1);
+  color: #ff3b30;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  border: 1px solid rgba(255, 59, 48, 0.2);
+  text-align: left;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
@@ -123,9 +140,19 @@
 }
 
 .login-button:disabled {
-  background-color: #ccc;
+  background-color: #666;
   cursor: not-allowed;
-  transform: none;
+  opacity: 0.7;
+}
+
+.login-button:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.login-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
 }
 
 /* Sign up link */

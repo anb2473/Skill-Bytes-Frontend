@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 
+const BACKEND_URL = 'http://localhost:3000';
+
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: '',
+    login: '',
     password: ''
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,18 +21,40 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // Here you would typically make an API call to your backend
-    console.log('Logging in with:', formData);
-    
-    // Simulate API call
-    setTimeout(() => {
+    setError('');
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // Important for cookies
+        body: JSON.stringify({
+          emailOrUsername: formData.login,
+          passw: formData.password
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.err || 'Login failed');
+      }
+
+      // If login is successful, the JWT will be in an HTTP-only cookie
+      // The browser will automatically handle the cookie
+      navigate('/dashboard'); // Redirect to dashboard or home page
+
+    } catch (err) {
+      setError(err.message || 'An error occurred during login');
+      console.error('Login error:', err);
+    } finally {
       setIsLoading(false);
-      // Handle successful login (e.g., redirect to dashboard)
-    }, 1000);
+    }
   };
 
   return (
@@ -39,14 +65,14 @@ const Login = () => {
         
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="login">Email or Username</label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
+              type="text"
+              id="login"
+              name="login"
+              value={formData.login}
               onChange={handleChange}
-              placeholder="Enter your email"
+              placeholder="Enter your email or username"
               required
             />
           </div>
@@ -64,12 +90,17 @@ const Login = () => {
             />
           </div>
           
+          {error && (
+            <div className="error-message">
+              {error}
+            </div>
+          )}
           <button 
             type="submit" 
             className="login-button"
             disabled={isLoading}
           >
-            {isLoading ? 'Signing in...' : 'Sign In'}
+            {isLoading ? 'Signing in...' : 'Continue'}
           </button>
         </form>
         
