@@ -175,6 +175,7 @@
 }
 
 .login-link a:hover {
+  text-decoration: none !important;
   border-color: #ffffff;
 }
 

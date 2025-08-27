@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './SignUp.css';
-
-const BACKEND_URL = 'http://localhost:3000';
+import { BACKEND_URL } from '../config'
 
 const SignUp = () => {
   const navigate = useNavigate();
