@@ -46,6 +46,8 @@ const Login = () => {
 
       // If login is successful, the JWT will be in an HTTP-only cookie
       // The browser will automatically handle the cookie
+      // Add a small delay to ensure cookie is set before redirect
+      await new Promise(resolve => setTimeout(resolve, 100));
       navigate('/onboarding-name'); // Redirect to onboarding-name
 
     } catch (err) {

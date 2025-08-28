@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './OnboardingName.css';
+import { BACKEND_URL } from '../config';
 
 const OnboardingName = () => {
   const [name, setName] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,19 +17,48 @@ const OnboardingName = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (name.trim()) {
-      // Here you would typically save the name to your state/context/API
-      console.log('User name:', name);
-      // Navigate to the next onboarding step or dashboard
-      navigate('/dashboard');
+    setError('');
+    const trimmedName = name.trim();
+    if (!trimmedName) {
+      setError('Please enter your name');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/user/set-name`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: trimmedName }),
+        credentials: 'include' // For session-based auth
+      });
+
+      if (!response.ok) {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const errorData = await response.json();
+          setError(errorData.err || 'Failed to set name');
+          return;
+        }
+        setError('An unexpected error occurred');
+        return;
+      }
+
+      // Navigate to the next step (username setup)
+      navigate('/onboarding-username');
+    } catch (error) {
+      console.error('Error setting name:', error);
+      setError(error.message || 'An error occurred while saving your name');
     }
   };
 
   return (
     <div className={`onboarding-container ${isLoaded ? 'loaded' : ''}`}>
       <div className="onboarding-content">
+        {error && <div className="error-message">{error}</div>}
         <div className="onboarding-image-container">
           <img 
             src="/onboarding.png" 

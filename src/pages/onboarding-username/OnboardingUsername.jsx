@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './OnboardingUsername.css';
+import { BACKEND_URL } from '../config';
 
 const OnboardingUsername = () => {
   const [username, setUsername] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
   const [isAvailable, setIsAvailable] = useState(true);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,13 +18,45 @@ const OnboardingUsername = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (username.trim() && isAvailable) {
-      // Here you would typically save the username to your state/context/API
-      console.log('Username set:', username);
-      // Navigate to the next onboarding step or dashboard
+    setError('');
+    if (!username.trim()) {
+      setError('Please enter a username');
+      return;
+    }
+    if (!isAvailable) {
+      setError('Please check username availability');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/user/set-username`, {
+        method: 'POST',
+        headers: {  
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: username.trim() }),
+        credentials: 'include' // Important for sending cookies if using session-based auth
+      });
+
+      if (!response.ok) {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const errorData = await response.json();
+          setError(errorData.err || 'Failed to set username');
+          return;
+        }
+        setError('An unexpected error occurred');
+        return;
+      }
+
+      // If successful, navigate to dashboard or next step
       navigate('/dashboard');
+    } catch (error) {
+      console.error('Error setting username:', error);
+      // You might want to show an error message to the user here
+      setError(error.message || 'An error occurred while setting your username');
     }
   };
 
@@ -38,6 +72,7 @@ const OnboardingUsername = () => {
   return (
     <div className={`onboarding-container ${isLoaded ? 'loaded' : ''}`}>
       <div className="onboarding-content">
+        {error && <div className="error-message">{error}</div>}
         <div className="onboarding-image-container">
           <img 
             src="/collaboration.png" 
