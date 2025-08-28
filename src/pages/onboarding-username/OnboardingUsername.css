@@ -1,0 +1,338 @@
+/* Base styles */
+:root {
+  --bg: #000000;
+  --text: #eaeaea;
+  --text-secondary: #b0b0b0;
+  --accent: #ffffff;
+  --border: #333333;
+  --input-bg: #1a1a1a;
+  --input-focus: #2a2a2a;
+  --success: #10b981;
+  --error: #ef4444;
+}
+
+.onboarding-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg);
+  padding: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  color: var(--text);
+}
+
+.onboarding-container.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.onboarding-content {
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  background: var(--bg);
+  padding: 2.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  animation: fadeIn 0.8s ease-out forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.onboarding-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: borderGlow 3s linear infinite;
+}
+
+.onboarding-image-container {
+  margin: 0 auto 2rem;
+  max-width: 280px;
+  animation: float 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
+}
+
+.onboarding-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.onboarding-title {
+  color: var(--accent);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  opacity: 0;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  animation: slideIn 0.6s ease-out 0.2s forwards;
+}
+
+.onboarding-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+  animation: slideIn 0.6s ease-out 0.4s forwards;
+}
+
+.username-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 0.6s forwards;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.username-input {
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  background-color: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  transition: all 0.3s ease;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  letter-spacing: 0.5px;
+  font-family: inherit;
+}
+
+.username-input:focus {
+  border-color: var(--accent);
+  background-color: var(--input-focus);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.username-input.error {
+  border-color: var(--error);
+}
+
+.username-input:focus.error {
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+.availability-message {
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  text-align: left;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  opacity: 0.9;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.availability-message.error {
+  color: var(--error);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.availability-message.success {
+  color: var(--success);
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.continue-button {
+  background-color: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  width: 100%;
+}
+
+.continue-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.continue-button:hover:not(:disabled)::before {
+  width: 100%;
+}
+
+.continue-button:hover:not(:disabled) {
+  color: var(--bg);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.continue-button:disabled {
+  border-color: var(--border);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.username-requirements {
+  text-align: left;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  border-left: 2px solid var(--accent);
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 0.8s forwards;
+}
+
+.username-requirements p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.username-requirements ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 1rem;
+}
+
+.username-requirements li {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.username-requirements li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.attribution {
+  margin-top: 2.5rem;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 1s forwards;
+  letter-spacing: 0.5px;
+}
+
+.attribution a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.attribution a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.attribution a:hover::after {
+  width: 100%;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes borderGlow {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .onboarding-content {
+    padding: 1.5rem;
+  }
+  
+  .onboarding-title {
+    font-size: 1.75rem;
+  }
+  
+  .onboarding-subtitle {
+    font-size: 1rem;
+  }
+  
+  .username-requirements {
+    padding: 0.75rem;
+  }
+}
