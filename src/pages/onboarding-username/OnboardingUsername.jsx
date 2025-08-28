@@ -64,7 +64,7 @@ const OnboardingUsername = () => {
               autoFocus
               minLength="3"
               maxLength="20"
-              pattern="[a-zA-Z0-9_]{3,20}"
+              pattern="[a-zA-Z0-9_]+"
               title="3-20 characters, letters, numbers, and underscores only"
             />
             {!isAvailable && (
@@ -72,9 +72,14 @@ const OnboardingUsername = () => {
                 Username is already taken. Please try another one.
               </p>
             )}
-            {isAvailable && username.length >= 3 && (
-              <p className="availability-message success">
-                Username is available!
+            {username.length > 0 && username.length < 3 && (
+              <p className="availability-message error">
+                Username must be at least 3 characters long
+              </p>
+            )}
+            {!/^[a-zA-Z0-9_]+$/.test(username) && username.length > 0 && (
+              <p className="availability-message error">
+                Only letters, numbers, and underscores are allowed
               </p>
             )}
           </div>
@@ -82,20 +87,11 @@ const OnboardingUsername = () => {
           <button 
             type="submit" 
             className="continue-button"
-            disabled={!username.trim() || !isAvailable}
+            disabled={!username.trim() || !isAvailable || username.length < 3 || !/^[a-zA-Z0-9_]+$/.test(username)}
           >
             Continue
           </button>
         </form>
-        
-        <div className="username-requirements">
-          <p>Your username must:</p>
-          <ul>
-            <li>Be 3-20 characters long</li>
-            <li>Contain only letters, numbers, and underscores</li>
-            <li>Be unique (we'll check for you)</li>
-          </ul>
-        </div>
         
         <div className="attribution">
           <a href="https://storyset.com/business" target="_blank" rel="noopener noreferrer">

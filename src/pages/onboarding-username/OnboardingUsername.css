@@ -144,12 +144,9 @@
 
 .availability-message.error {
   color: var(--error);
-  background-color: rgba(239, 68, 68, 0.1);
-}
-
-.availability-message.success {
-  color: var(--success);
-  background-color: rgba(16, 185, 129, 0.1);
+  background-color: transparent;
+  padding: 0.25rem 0;
+  margin: 0.25rem 0 0;
 }
 
 .continue-button {
