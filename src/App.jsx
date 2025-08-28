@@ -5,6 +5,7 @@ import Contact from "./pages/contact/Contact.jsx";
 import SignUp from "./pages/signup/SignUp.jsx";
 import Login from "./pages/login/Login.jsx";
 import Dashboard from "./pages/dashboard/Dashboard.jsx";
+import OnboardingName from "./pages/onboarding-name/OnboardingName.jsx";
 import "./App.css";
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/onboarding-name" element={<OnboardingName />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </main>

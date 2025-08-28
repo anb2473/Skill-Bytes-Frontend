@@ -46,7 +46,7 @@ const Login = () => {
 
       // If login is successful, the JWT will be in an HTTP-only cookie
       // The browser will automatically handle the cookie
-      navigate('/dashboard'); // Redirect to dashboard or home page
+      navigate('/onboarding-name'); // Redirect to onboarding-name
 
     } catch (err) {
       setError(err.message || 'An error occurred during login');

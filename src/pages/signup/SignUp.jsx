@@ -46,8 +46,8 @@ const SignUp = () => {
         throw new Error(data.err || 'Signup failed');
       }
 
-      // Redirect to dashboard on successful signup
-      navigate('/dashboard');
+      // Redirect to onboarding-name on successful signup
+      navigate('/onboarding-name');
 
     } catch (err) {
       setError(err.message || 'An error occurred during signup');
