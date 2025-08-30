@@ -3,11 +3,39 @@ import { Link } from 'react-router-dom';
 import * as THREE from "three";
 import "./Home.css";
 import Features from "./Features";
+import { BACKEND_URL } from '../config';
 
 function Home() {
   const mountRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
+  const [serverStatus, setServerStatus] = useState('checking');
   const contentRef = useRef(null);
+
+  // Check server status on component mount
+  useEffect(() => {
+    const checkServerStatus = async () => {
+      try {
+        const response = await fetch(`${BACKEND_URL}/ping`, {
+          method: 'GET',
+          headers: {  
+            'Content-Type': 'application/json',
+          },
+        });
+        console.log(`${BACKEND_URL}/ping`, response)
+        if (!response.ok) throw new Error('Server not responding');
+        setServerStatus('online');
+      } catch (error) {
+        console.error('Server status check failed:', error);
+        setServerStatus('error');
+      }
+    };
+    checkServerStatus();
+  }, []);
+
+  // Close notification handler
+  const closeNotification = () => {
+    setServerStatus('dismissed');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -190,6 +218,20 @@ function Home() {
 
   return (
     <div className="home-container">
+      {serverStatus === 'error' && (
+        <div className="server-notification">
+          <button
+            className="server-notification-close"
+            onClick={closeNotification}
+            onKeyPress={(e) => e.key === 'Enter' && closeNotification()}
+            aria-label="Close notification"
+          >
+            &times;
+          </button>
+          <span className="server-notification-icon">⚠️</span>
+          <span>Servers are currently in development. Launching soon - thanks for your patience!</span>
+        </div>
+      )}
       <div className="home-root" ref={mountRef}>
         <div className="home-content-container">
           <div 

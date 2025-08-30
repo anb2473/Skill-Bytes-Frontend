@@ -55,8 +55,7 @@ const OnboardingUsername = () => {
       navigate('/dashboard');
     } catch (error) {
       console.error('Error setting username:', error);
-      // You might want to show an error message to the user here
-      setError(error.message || 'An error occurred while setting your username');
+      setError('An error occurred while setting your username');
     }
   };
 

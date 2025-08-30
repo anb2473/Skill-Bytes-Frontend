@@ -51,7 +51,7 @@ const OnboardingName = () => {
       navigate('/onboarding-username');
     } catch (error) {
       console.error('Error setting name:', error);
-      setError(error.message || 'An error occurred while saving your name');
+      setError('An error occurred while saving your name');
     }
   };
 
