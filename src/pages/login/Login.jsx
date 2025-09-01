@@ -26,22 +26,22 @@ const Login = () => {
     setError('');
 
     try {
+      // Create Basic Auth token
+      const token = btoa(`${formData.login}:${formData.password}`);
+      
       const response = await fetch(`${BACKEND_URL}/auth/login`, {
         method: 'POST',
         headers: {
+          'Authorization': `Basic ${token}`,
           'Content-Type': 'application/json',
         },
         credentials: 'include', // Important for cookies
-        body: JSON.stringify({
-          emailOrUsername: formData.login,
-          passw: formData.password
-        }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.err || 'Login failed');
+        throw new Error(data.err || 'An error occurred during login');
       }
 
       // If login is successful, the JWT will be in an HTTP-only cookie

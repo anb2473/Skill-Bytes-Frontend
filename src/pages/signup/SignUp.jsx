@@ -27,17 +27,16 @@ const SignUp = () => {
     setError('');
 
     try {
+      // Create Basic Auth token with username:password
+      const token = btoa(`${formData.email}:${formData.password}`);
+      
       const response = await fetch(`${BACKEND_URL}/auth/signup`, {
         method: 'POST',
         headers: {
+          'Authorization': `Basic ${token}`,
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify({
-          username: formData.username,
-          email: formData.email,
-          passw: formData.password
-        }),
       });
 
       const data = await response.json();
@@ -50,7 +49,7 @@ const SignUp = () => {
       navigate('/onboarding-name');
 
     } catch (err) {
-      setError(err.message || 'An error occurred during signup');
+      setError('An error occurred during signup');
       console.error('Signup error:', err);
     } finally {
       setIsLoading(false);
@@ -64,21 +63,6 @@ const SignUp = () => {
         <p className="subtitle">Start your journey with us</p>
         
         <form onSubmit={handleSubmit} className="signup-form">
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              placeholder="Choose a username"
-              required
-              minLength="3"
-              maxLength="30"
-            />
-          </div>
-          
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
