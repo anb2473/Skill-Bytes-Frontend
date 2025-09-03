@@ -12,11 +12,12 @@ function Dashboard() {
     useEffect(() => {
         const checkServerStatus = async () => {
             try {
-                const response = await fetch(`${BACKEND_URL}/inbox`, {
+                const response = await fetch(`${BACKEND_URL}/user/inbox`, {
                     method: 'GET',
                     headers: {  
                         'Content-Type': 'application/json',
                     },
+                    credentials: 'include'
                 });
                 
                 if (!response.ok) {
@@ -77,7 +78,7 @@ function Dashboard() {
                 </div>
             )}
             {inbox.map((message, index) => (
-                <div key={index} className="server-notification">
+                <div key={index} className="server-notification" style={{borderLeft: `4px solid ${message.bannerColor || '#2821fc'}`}}>
                     <button
                         className="server-notification-close"
                         onClick={() => closeNotification(index, message.id)}
