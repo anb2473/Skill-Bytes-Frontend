@@ -4,7 +4,7 @@ import Home from "./pages/home/home.jsx";
 import Contact from "./pages/contact/Contact.jsx";
 import SignUp from "./pages/signup/SignUp.jsx";
 import Login from "./pages/login/Login.jsx";
-import Dashboard from "./pages/dashboard/Dashboard.jsx";
+import Dashboard from "./pages/dashboard/dashboard.jsx";
 import OnboardingName from "./pages/onboarding-name/OnboardingName.jsx";
 import OnboardingUsername from "./pages/onboarding-username/OnboardingUsername.jsx";
 import "./App.css";
