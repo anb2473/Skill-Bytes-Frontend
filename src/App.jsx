@@ -15,6 +15,7 @@ import "./App.css";
 function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const location = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -51,6 +52,11 @@ function App() {
 
   return (
     <div>
+      {!shouldHideNav && (
+        <nav className="navbar">
+          {/* your existing global nav here */}
+        </nav>
+      )}
       <nav className="navbar">
         <Link to="/" className="logo" onClick={closeMobileMenu}>
           <img src="/icon-large.png" alt="Skill Bytes Logo" />

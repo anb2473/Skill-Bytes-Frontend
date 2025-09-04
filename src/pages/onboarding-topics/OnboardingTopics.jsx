@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
 import './OnboardingTopics.css';
 import { BACKEND_URL } from '../config';
 
