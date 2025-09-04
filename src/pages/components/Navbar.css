@@ -1,0 +1,11 @@
+.navbar {
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
