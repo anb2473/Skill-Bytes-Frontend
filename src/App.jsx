@@ -7,6 +7,9 @@ import Login from "./pages/login/Login.jsx";
 import Dashboard from "./pages/dashboard/dashboard.jsx";
 import OnboardingName from "./pages/onboarding-name/OnboardingName.jsx";
 import OnboardingUsername from "./pages/onboarding-username/OnboardingUsername.jsx";
+import OnboardingLang from "./pages/onboarding-lang/OnboardingLang.jsx";
+import OnboardingTopics from "./pages/onboarding-topics/OnboardingTopics.jsx";
+
 import "./App.css";
 
 function App() {
@@ -69,6 +72,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/onboarding-name" element={<OnboardingName />} />
           <Route path="/onboarding-username" element={<OnboardingUsername />} />
+          <Route path="/onboarding-lang" element={<OnboardingLang />} />
+          <Route path="/onboarding-topics" element={<OnboardingTopics />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </main>
