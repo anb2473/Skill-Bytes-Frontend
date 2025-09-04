@@ -1,0 +1,65 @@
+.onboarding-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #000;
+  padding: 2rem;
+}
+
+.onboarding-card {
+  background: #000;
+  border: 1px solid #222;
+  width: 100%;
+  max-width: 500px;
+  padding: 2.5rem;
+  text-align: center;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.onboarding-card h1 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.onboarding-form .form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.onboarding-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.onboarding-form select,
+.onboarding-form input[type="checkbox"] {
+  margin-top: 0.5rem;
+}
+
+.onboarding-button {
+  width: 100%;
+  background: #fff;
+  color: #000;
+  border: 1px solid #fff;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 2rem;
+  border-radius: 4px;
+}
+
+.onboarding-button:hover {
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(255,255,255,0.1);
+}
