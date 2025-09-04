@@ -40,6 +40,15 @@ function App() {
     }
   };
 
+  const hideNavRoutes = [
+    "/onboarding-name",
+    "/onboarding-username",
+    "/onboarding-lang",
+    "/onboarding-topics",
+  ];
+
+  const shouldHideNav = hideNavRoutes.includes(location.pathname);
+
   return (
     <div>
       <nav className="navbar">
