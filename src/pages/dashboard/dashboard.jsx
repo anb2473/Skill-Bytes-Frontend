@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./dashboard.css";
 import { BACKEND_URL } from "../config";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
     const [isHovered, setIsHovered] = useState(false);
@@ -100,7 +101,7 @@ function Dashboard() {
                 <div className="challenge-content">
                     <h2>Daily Challenge</h2>
                     <p>Test your skills with today's featured challenge</p>
-                    <button className="start-button">Start Challenge</button>
+                    <Link className="start-button" to="/daily-challenge">Start Challenge</Link>
                 </div>
                 <div className="challenge-image">
                     <img 

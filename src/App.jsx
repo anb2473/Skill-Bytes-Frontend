@@ -7,6 +7,7 @@ import Login from "./pages/login/Login.jsx";
 import Dashboard from "./pages/dashboard/Dashboard.jsx";
 import OnboardingName from "./pages/onboarding-name/OnboardingName.jsx";
 import OnboardingUsername from "./pages/onboarding-username/OnboardingUsername.jsx";
+import DailyChallenge from "./pages/daily-challenge/DailyChallenge.jsx";
 import "./App.css";
 
 function App() {
@@ -70,6 +71,7 @@ function App() {
           <Route path="/onboarding-name" element={<OnboardingName />} />
           <Route path="/onboarding-username" element={<OnboardingUsername />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/daily-challenge" element={<DailyChallenge />}></Route>
         </Routes>
       </main>
     </div>
