@@ -12,6 +12,7 @@ Before submitting any code — including pull requests, direct commits, forks, o
 The full CLA can be found here: [docs/CLA.md](CLA.md)
 
 By contributing, you are acknowledging that:  
+
 - Your contributions are assigned to the project maintainer, Austin Blass.  
 - The CLA is **irrevocable and permanent** for your contributions.  
 - Only the legal copyright owner can modify or revoke the CLA.
