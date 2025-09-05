@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./dashboard.css";
+import "./Dashboard.css";
 import { BACKEND_URL } from "../config";
 import { Link } from "react-router-dom";
 
