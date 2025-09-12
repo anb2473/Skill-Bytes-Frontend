@@ -51,8 +51,8 @@ const OnboardingUsername = () => {
         return;
       }
 
-      // If successful, navigate to dashboard or next step
-      navigate('/dashboard');
+      // If successful, navigate to pref lang
+      navigate('/onboarding-pref-lang');
     } catch (error) {
       console.error('Error setting username:', error);
       setError('An error occurred while setting your username');

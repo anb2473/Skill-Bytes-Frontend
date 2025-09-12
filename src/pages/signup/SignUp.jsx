@@ -42,6 +42,10 @@ const SignUp = () => {
       const data = await response.json();
 
       if (!response.ok) {
+        if (response.status === 409) {
+          setError('An account with this email already exists. Please try logging in instead.');
+          return;
+        }
         throw new Error(data.err || 'Signup failed');
       }
 
