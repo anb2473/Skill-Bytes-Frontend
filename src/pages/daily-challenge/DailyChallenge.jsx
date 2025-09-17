@@ -43,10 +43,13 @@ result; // This will be displayed in the output`);
         const challenge = data.challenge;
         setChallenge({
           title: challenge.title || "Failed to Load Daily Challenge",
-          description: challenge.content || "We know this sucks, but we failed to load your daily challenge. Try again later! Also, please report this issue if it persists. Thanks! :)",
+          description: challenge.description || "We know this sucks, but we failed to load your daily challenge. Try again later! Also, please report this issue if it persists. Thanks! :)",
           difficulty: challenge.difficulty || "Impossible",
-          points: challenge.points || "∞"
+          points: challenge.points || "∞",
+          content: challenge.content || ""
         });
+        // Set the editor content to the challenge content
+        setSource(challenge.content || "");
         setError(null);
       } catch (err) {
         console.error("Failed to fetch daily challenge:", err);
@@ -110,8 +113,8 @@ result; // This will be displayed in the output`);
   };
 
   const resetCode = () => {
-    if (window.confirm("Are you sure you want to reset the code to the default example?")) {
-      setSource(`// Welcome to Daily Challenge!\n// Write your JavaScript code here and click Run to see the output.\n// Example:\nfor (let i = 1; i <= 5; i++) {\n  console.log(\"Iteration:\", i);\n}\n\n// You can also return values\nconst result = 42 + 1;\nresult; // This will be displayed in the output`);
+    if (window.confirm("Are you sure you want to reset the code to the challenge template?")) {
+      setSource(challenge.content || "");
       setOutput("Click 'Run Code' to execute your JavaScript and see the output here.");
     }
   };
@@ -135,13 +138,11 @@ result; // This will be displayed in the output`);
         ) : (
           <>
             <h1 className="wat-title">{challenge.title}</h1>
-            <p className="wat-description">
-              {challenge.description}
-            </p>
             <div className="wat-meta">
               <span className="wat-difficulty">Difficulty: {challenge.difficulty}</span>
               <span className="wat-points">Points: {challenge.points}</span>
             </div>
+            <div className="wat-description" dangerouslySetInnerHTML={{ __html: challenge.description }}></div>
           </>
         )}
       </div>
