@@ -9,6 +9,7 @@ import OnboardingName from "./pages/onboarding-name/OnboardingName.jsx";
 import OnboardingUsername from "./pages/onboarding-username/OnboardingUsername.jsx";
 import OnboardingPrefLang from "./pages/onboarding-pref-lang/OnboardingPrefLang.jsx";
 import OnboardingPref from "./pages/onboarding-pref/OnboardingPref.jsx";
+import ChallengeSelector from "./pages/challenge-selector/ChallengeSelector.jsx";
 import DailyChallenge from "./pages/daily-challenge/DailyChallenge.jsx";
 import "./App.css";
 
@@ -75,6 +76,7 @@ function App() {
           <Route path="/onboarding-pref-lang" element={<OnboardingPrefLang />} />
           <Route path="/onboarding-pref" element={<OnboardingPref />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/challenge-selector" element={<ChallengeSelector />} />
           <Route path="/daily-challenge" element={<DailyChallenge />}></Route>
         </Routes>
       </main>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "./DailyChallenge.css";
 import { BACKEND_URL } from "../config";
 
@@ -6,6 +7,10 @@ import { BACKEND_URL } from "../config";
 import { FaPlay, FaRedo, FaTerminal, FaCode, FaSpinner } from "react-icons/fa";
 
 function DailyChallenge() {
+  const location = useLocation();
+  const challengeFromState = location.state?.challenge;
+  const isCompletedChallenge = location.state?.isCompletedChallenge;
+  
   const [source, setSource] = useState(`// Welcome to Daily Challenge!
 // Write your JavaScript code here and click Run to see the output.
 // Example:
@@ -29,6 +34,15 @@ result; // This will be displayed in the output`);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // If we have challenge data from navigation state, use it directly
+    if (challengeFromState) {
+      setChallenge(challengeFromState);
+      setSource(challengeFromState.content || "");
+      setIsLoading(false);
+      return;
+    }
+
+    // Otherwise, fetch the daily challenge as before
     const fetchDailyChallenge = async () => {
       try {
         const response = await fetch(`${BACKEND_URL}/user/get-daily-challenge`, {
@@ -66,7 +80,7 @@ result; // This will be displayed in the output`);
     };
 
     fetchDailyChallenge();
-  }, []);
+  }, [challengeFromState]);
 
   const runCode = () => {
     if (!source.trim()) {
