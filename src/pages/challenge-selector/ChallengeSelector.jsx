@@ -67,10 +67,10 @@ const ChallengeSelector = () => {
       navigate('/daily-challenge', { 
         state: { 
           challenge: {
-            title: challenge.title || "Daily Challenge",
-            description: challenge.description || "Complete today's challenge!",
-            difficulty: challenge.difficulty || "Medium",
-            points: challenge.points || 10,
+            title: challenge.title || "Failed to Load Daily Challenge",
+            description: challenge.description || "We know this sucks, but we failed to load your daily challenge. Try again later! Also, please report this issue if it persists. Thanks! :)",
+            difficulty: challenge.difficulty || "Impossible",
+            points: challenge.points || "∞",
             content: challenge.content || ""
           },
           isCompletedChallenge: false 
@@ -84,23 +84,6 @@ const ChallengeSelector = () => {
     }
   };
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  };
-
-  const getDifficultyColor = (difficulty) => {
-    switch (difficulty?.toLowerCase()) {
-      case 'easy': return '#10b981';
-      case 'medium': return '#f59e0b';
-      case 'hard': return '#ef4444';
-      default: return '#6b7280';
-    }
-  };
 
   if (isLoading) {
     return (
@@ -158,23 +141,14 @@ const ChallengeSelector = () => {
                     <div className="challenge-header">
                       <h3 className="challenge-title">{challenge.title}</h3>
                       <div className="challenge-meta">
-                        <span 
-                          className="difficulty-badge"
-                          style={{ backgroundColor: getDifficultyColor(challenge.difficulty) }}
-                        >
+                        <span className="difficulty-badge">
                           {challenge.difficulty}
                         </span>
                         <span className="points-badge">{challenge.points} pts</span>
                       </div>
                     </div>
                     <div className="challenge-description">
-                      {challenge.description?.substring(0, 100)}
-                      {challenge.description?.length > 100 && '...'}
-                    </div>
-                    <div className="challenge-footer">
-                      <span className="completion-date">
-                        Completed: {formatDate(challenge.completedAt || challenge.date)}
-                      </span>
+                      {challenge.selectorDescription}
                     </div>
                   </div>
                 ))}
