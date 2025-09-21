@@ -2,11 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "./DailyChallenge.css";
 import { BACKEND_URL } from "../config";
+import Editor from "react-simple-code-editor";
+import Prism from "prismjs";
+import "prismjs/components/prism-javascript";
+import "prismjs/themes/prism.css"; // or another Prism theme
 
 // Import icons (you may need to install react-icons or use your preferred icon library)
 import { FaPlay, FaRedo, FaTerminal, FaCode, FaSpinner } from "react-icons/fa";
 
 function DailyChallenge() {
+  const highlight = (code) =>
+    Prism.highlight(code, Prism.languages.javascript, "javascript");
+
   const location = useLocation();
   const challengeFromState = location.state?.challenge;
   const isCompletedChallenge = location.state?.isCompletedChallenge;
@@ -193,12 +200,18 @@ result; // This will be displayed in the output`);
             </button>
           </div>
         </div>
-        <textarea
-          className="wat-textarea"
+        <Editor
+          className="code-editor"                // wrapper we control
+          textareaClassName="code-textarea"     // put this class on the inner textarea
           value={source}
-          onChange={(e) => setSource(e.target.value)}
-          placeholder="Enter your JavaScript code here..."
-          spellCheck="false"
+          onValueChange={setSource}
+          highlight={highlight}
+          padding={12}
+          style={{
+            fontFamily: '"Fira Code", monospace',
+            fontSize: 14,
+            minHeight: "200px",
+          }}
         />
       </div>
 
