@@ -16,8 +16,8 @@ function DailyChallenge() {
 
   const location = useLocation();
   const challengeFromState = location.state?.challenge;
-  const isCompletedChallenge = location.state?.isCompletedChallenge;
-  
+    const functionNameFromState = location.state?.functionName;
+
   const [source, setSource] = useState(`// Welcome to Daily Challenge!
 // Write your JavaScript code here and click Run to see the output.
 // Example:
@@ -39,12 +39,14 @@ result; // This will be displayed in the output`);
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [functionName, setFunctionName] = useState("");
 
   useEffect(() => {
     // If we have challenge data from navigation state, use it directly
     if (challengeFromState) {
       setChallenge(challengeFromState);
       setSource(challengeFromState.content || "");
+      setFunctionName(functionNameFromState);
       setIsLoading(false);
       return;
     }
@@ -67,10 +69,13 @@ result; // This will be displayed in the output`);
           description: challenge.description || "We know this sucks, but we failed to load your daily challenge. Try again later! Also, please report this issue if it persists. Thanks! :)",
           difficulty: challenge.difficulty || "Impossible",
           points: challenge.points || "∞",
-          content: challenge.content || ""
+          content: challenge.content || "",
+          tests: challenge.tests || [],
         });
+        setFunctionName(challenge.functionName || "");
         // Set the editor content to the challenge content
         setSource(challenge.content || "");
+        console.log(challenge.functionName);
         setError(null);
       } catch (err) {
         console.error("Failed to fetch daily challenge:", err);
@@ -98,36 +103,66 @@ result; // This will be displayed in the output`);
     setIsRunning(true);
     setOutput("Running...");
     
-    // Use setTimeout to allow the UI to update before running potentially blocking code
     setTimeout(() => {
-      let logs = [];
-      const originalConsoleLog = console.log;
-
       try {
-        // Intercept console.log
-        console.log = (...args) => {
-          logs.push(args.map(arg => 
-            typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
-          ).join(' '));
-        };
+        // Extract test function
+        const fn = new Function(`
+          ${source}
+          return ${functionName}
+        `)
+        const reverseString = fn();
 
-        // Execute the user code
-        const result = Function('"use strict";\n' + source)();
-
-        if (result !== undefined) {
-          logs.push(
-            typeof result === 'object' 
-              ? JSON.stringify(result, null, 2) 
-              : String(result)
-          );
+        if (typeof reverseString !== 'function') {
+          setOutput(`❌ Must have a function named "${functionName}".`);
+          setIsRunning(false);
+          return;
+        }
+        
+        if (challenge.testCases.length === 0) {
+          setOutput("⚠️ No tests available for this challenge. Please verify your solution manually.");
+          return;
         }
 
-        setOutput(logs.join("\n") || "Code executed successfully (no output).");
+        challenge.testCases.forEach((test) => {
+          const out = reverseString(test.input);
+          if (out !== test.output) {
+            setOutput(`❌ Test failed for input "${test.input}". Expected "${test.output}", but got "${out}".`);
+            return;
+          }
+        })
+
+        let i = 0;
+        while (i < Math.min(challenge.generator.cases, 1000)) { // Limit to 1000 cases to prevent infinite loops
+          i++;
+
+          let input;
+          try {
+            input = eval(challenge.generator.inFn)
+          } catch (err) {
+            setOutput(`❌ Error during test case generation: ${err.message}`);
+            return;
+          }
+          try {
+            const output = reverseString(input);
+            eval(`
+              const output = \`${output}\`;
+              const input = \`${input}\`;
+              ${challenge.generator.outFn}`);
+          } catch (err) {
+            setOutput(`❌ Error during test case execution: ${err.message} 
+              const output = \"${output}\";
+              const input = \"${input}\";
+              ${challenge.generator.outFn}`);
+            return;
+          }
+        }
+
+        setOutput(`✅ All tests passed! Great job!`);
+        return;
       } catch (err) {
+        console.log(err);
         setOutput(`❌ Error: ${err.message}`);
       } finally {
-        // Restore original console.log
-        console.log = originalConsoleLog;
         setIsRunning(false);
       }
     }, 100);

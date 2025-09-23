@@ -41,7 +41,16 @@ const ChallengeSelector = () => {
     // Navigate to daily challenge page with the selected challenge data
     navigate('/daily-challenge', { 
       state: { 
-        challenge: challenge,
+        challenge: {
+          title: challenge.title || "Failed to Load Daily Challenge",
+          description: challenge.description || "We know this sucks, but we failed to load your daily challenge. Try again later! Also, please report this issue if it persists. Thanks! :)",
+          difficulty: challenge.difficulty || "Impossible",
+          points: challenge.points || "∞",
+          content: challenge.content || "",
+          testCases: challenge.testCases || [],
+          generator: challenge.generator || null,
+        },
+        functionName: challenge.functionName || "",
         isCompletedChallenge: true 
       } 
     });
@@ -71,8 +80,11 @@ const ChallengeSelector = () => {
             description: challenge.description || "We know this sucks, but we failed to load your daily challenge. Try again later! Also, please report this issue if it persists. Thanks! :)",
             difficulty: challenge.difficulty || "Impossible",
             points: challenge.points || "∞",
-            content: challenge.content || ""
+            content: challenge.content || "",
+            testCases: challenge.testCases || [],
+            generator: challenge.generator || null,
           },
+          functionName: challenge.functionName || "",
           isCompletedChallenge: false 
         } 
       });
