@@ -123,13 +123,13 @@ result; // This will be displayed in the output`);
           return;
         }
 
-        challenge.testCases.forEach((test) => {
+        for (const test of challenge.testCases) {
           const out = reverseString(test.input);
-          if (out !== test.output) {
-            setOutput(`❌ Test failed for input "${test.input}". Expected "${test.output}", but got "${out}".`);
+          if (out !== test.expectedOutput) {
+            setOutput(`❌ Test failed for input "${test.input}". Expected "${test.expectedOutput}", but got "${out}".`);
             return;
           }
-        })
+        }
 
         let i = 0;
         while (i < Math.min(challenge.generator.cases, 1000)) { // Limit to 1000 cases to prevent infinite loops
@@ -144,15 +144,16 @@ result; // This will be displayed in the output`);
           }
           try {
             const output = reverseString(input);
-            eval(`
-              const output = \`${output}\`;
-              const input = \`${input}\`;
+            const out = eval(`
+              const output = \`${JSON.stringify(output)}\`;
+              const input = \`${JSON.stringify(input)}\`;
               ${challenge.generator.outFn}`);
+            if (out === false) {
+              setOutput(`❌ Test failed for the input: \"${input.trim()}\", returned \"${output}\"`);
+              return;
+            }
           } catch (err) {
-            setOutput(`❌ Error during test case execution: ${err.message} 
-              const output = \"${output}\";
-              const input = \"${input}\";
-              ${challenge.generator.outFn}`);
+            setOutput(`❌ Error during test case execution: ${err.message}`);
             return;
           }
         }
