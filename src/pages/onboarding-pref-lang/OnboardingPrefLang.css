@@ -10,7 +10,11 @@
   --success: #10b981;
   --error: #ef4444;
   --premium: #f59e0b;
+  --comming-soon: #585b61;
+  --comming-soon-bg: #2c2f36;
   --free: #10b981;
+  --premium-bg: rgba(245, 158, 11, 0.2)
+  --free-bg: rgba(16, 185, 129, 0.2)
 }
 
 .onboarding-container {
@@ -129,20 +133,31 @@
   box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
 }
 
+.language-option.comming-soon {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 .language-option.selected {
   border-color: var(--accent);
   background-color: var(--input-focus);
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
 }
 
+.language-option.comming-soon.selected {
+  border-color: var(--border);
+  background-color: var(--input-bg);
+  box-shadow: none;
+}
+
 .language-option.free.selected {
   border-color: var(--free);
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 0 2px var(--free-bg);
 }
 
 .language-option.premium.selected {
   border-color: var(--premium);
-  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3);
+  box-shadow: 0 0 0 2px var(--premium-bg);
 }
 
 .language-name {
@@ -162,15 +177,21 @@
 }
 
 .free-badge {
-  background-color: rgba(16, 185, 129, 0.2);
+  background-color: var(--free-bg);
   color: var(--free);
   border: 1px solid var(--free);
 }
 
 .premium-badge {
-  background-color: rgba(245, 158, 11, 0.2);
+  background-color: var(--premium-bg);
   color: var(--premium);
   border: 1px solid var(--premium);
+}
+
+.comming-soon-badge {
+  background-color: var(--comming-soon-bg);
+  color: var(--comming-soon);
+  border: 1px solid var(--comming-soon);
 }
 
 .continue-button {

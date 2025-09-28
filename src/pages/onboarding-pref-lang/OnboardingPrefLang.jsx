@@ -10,18 +10,18 @@ const OnboardingPrefLang = () => {
   const navigate = useNavigate();
 
   const languages = [
-    { name: 'JavaScript', value: 'javascript', isPremium: false },
-    { name: 'Python', value: 'python', isPremium: true },
-    { name: 'Java', value: 'java', isPremium: true },
-    { name: 'C++', value: 'cpp', isPremium: true },
-    { name: 'C#', value: 'csharp', isPremium: true },
-    { name: 'Go', value: 'go', isPremium: true },
-    { name: 'Rust', value: 'rust', isPremium: true },
-    { name: 'TypeScript', value: 'typescript', isPremium: true },
-    { name: 'PHP', value: 'php', isPremium: true },
-    { name: 'Ruby', value: 'ruby', isPremium: true },
-    { name: 'Swift', value: 'swift', isPremium: true },
-    { name: 'Kotlin', value: 'kotlin', isPremium: true }
+    { name: 'JavaScript', value: 'javascript', type: 'free' },
+    { name: 'Python', value: 'python', type: 'comming soon' },
+    { name: 'Java', value: 'java', type: 'comming soon' },
+    { name: 'C++', value: 'cpp', type: 'comming soon' },
+    { name: 'C#', value: 'csharp', type: 'comming soon' },
+    { name: 'Go', value: 'go', type: 'comming soon' },
+    { name: 'Rust', value: 'rust', type: 'comming soon'},
+    { name: 'TypeScript', value: 'typescript', type: 'comming soon' },
+    { name: 'PHP', value: 'php', type: 'comming soon' },
+    { name: 'Ruby', value: 'ruby', type: 'comming soon' },
+    { name: 'Swift', value: 'swift', type: 'comming soon' },
+    { name: 'Kotlin', value: 'kotlin', type: 'comming soon' }
   ];
 
   useEffect(() => {
@@ -92,12 +92,12 @@ const OnboardingPrefLang = () => {
             {languages.map((language) => (
               <div
                 key={language.value}
-                className={`language-option ${selectedLanguage === language.value ? 'selected' : ''} ${language.isPremium ? 'premium' : 'free'}`}
+                className={`language-option ${selectedLanguage === language.value ? 'selected' : ''} ${language.type === 'comming soon' ? 'comming-soon' : language.type}`}
                 onClick={() => setSelectedLanguage(language.value)}
               >
                 <div className="language-name">{language.name}</div>
-                <div className={`language-badge ${language.isPremium ? 'premium-badge' : 'free-badge'}`}>
-                  {language.isPremium ? 'Premium' : 'Free'}
+                <div className={`language-badge ${language.type === 'comming soon' ? 'comming-soon-badge' : `${language.type}-badge`}`}>
+                  {language.type}
                 </div>
               </div>
             ))}
