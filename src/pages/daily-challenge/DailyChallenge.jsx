@@ -158,7 +158,21 @@ result; // This will be displayed in the output`);
           }
         }
 
-        setOutput(`✅ All tests passed! Great job!`);
+        ret = fetch(`${BACKEND_URL}/user/complete-daily-challenge`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include', // Include cookies for authentication if needed
+          body: JSON.stringify({ challengeId: challenge.id, code: source })
+        })
+        if (ret.ok) {
+          setOutput(`✅ All tests passed! Great job!`);
+        }
+        else {
+          setOutput(`⚠️ All tests passed, but failed to record completion. Please try again later.`);
+        }
+
         return;
       } catch (err) {
         console.log(err);
