@@ -5,6 +5,7 @@ import { BACKEND_URL } from '../config';
 
 const ChallengeSelector = () => {
   const [completedChallenges, setCompletedChallenges] = useState([]);
+  const [solvedChallenges, setSolvedChallenges] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [isGettingNewChallenge, setIsGettingNewChallenge] = useState(false);
@@ -29,6 +30,17 @@ const ChallengeSelector = () => {
 
       const data = await response.json();
       setCompletedChallenges(data.challenges || []);
+
+      const response2 = await fetch(`${BACKEND_URL}/user/challenge-completion-status`, {
+        credentials: 'include'
+      });
+
+      if (!response2.ok) {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      }
+      
+      const data2 = await response2.json();
+      setSolvedChallenges(data2.solvedChallenges || []);
     } catch (err) {
       console.error('Failed to fetch completed challenges:', err);
       setError('Failed to load your completed challenges. Please try again later.');
@@ -83,6 +95,7 @@ const ChallengeSelector = () => {
             content: challenge.content || "",
             testCases: challenge.testCases || [],
             generator: challenge.generator || null,
+            help: challenge.help || "",
           },
           functionName: challenge.functionName || "",
           isCompletedChallenge: false 
@@ -144,26 +157,47 @@ const ChallengeSelector = () => {
             <div className="completed-challenges-section">
               <h2>Your Completed Challenges</h2>
               <div className="completed-challenges-grid">
-                {completedChallenges.map((challenge, index) => (
-                  <div
-                    key={challenge.id || index}
-                    className="completed-challenge-card"
-                    onClick={() => handleChallengeSelect(challenge)}
-                  >
-                    <div className="challenge-header">
-                      <h3 className="challenge-title">{challenge.title}</h3>
-                      <div className="challenge-meta">
-                        <span className="difficulty-badge">
-                          {challenge.difficulty}
-                        </span>
-                        <span className="points-badge">{challenge.points} pts</span>
+                {completedChallenges.map((challenge, index) =>
+                  solvedChallenges.includes(challenge.id) ? (
+                    <div
+                      key={challenge.id || index}
+                      className="completed-challenge-card"
+                      onClick={() => handleChallengeSelect(challenge)}
+                    >
+                      <div className="challenge-header">
+                        <h3 className="challenge-title">{challenge.title}</h3>
+                        <div className="challenge-meta">
+                          <span className="difficulty-badge">
+                            {challenge.difficulty}
+                          </span>
+                          <span className="points-badge">{challenge.points} pts</span>
+                        </div>
+                      </div>
+                      <div className="challenge-description">
+                        {challenge.selectorDescription}
                       </div>
                     </div>
-                    <div className="challenge-description">
-                      {challenge.selectorDescription}
+                  ) : (
+                    <div
+                      key={challenge.id || index}
+                      className="incompleted-challenge-card"
+                      onClick={() => handleChallengeSelect(challenge)}
+                    >
+                      <div className="challenge-header">
+                        <h3 className="challenge-title">{challenge.title}</h3>
+                        <div className="challenge-meta">
+                          <span className="difficulty-badge">
+                            {challenge.difficulty}
+                          </span>
+                          <span className="points-badge">{challenge.points} pts</span>
+                        </div>
+                      </div>
+                      <div className="challenge-description">
+                        {challenge.selectorDescription}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                )}
               </div>
             </div>
           ) : (

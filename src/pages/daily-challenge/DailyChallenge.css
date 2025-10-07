@@ -217,6 +217,20 @@ body {
   border-color: #555;
 }
 
+.wat-button-help {
+  background: transparent;
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
+}
+
+.wat-button-help:hover:not(:disabled) {
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+  border-color: #60a5fa;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
 .wat-button-icon {
   font-size: 0.9em;
 }
@@ -506,6 +520,139 @@ body {
   .wat-buttons {
     width: 100%;
     justify-content: flex-end;
+  }
+}
+
+/* Help Modal Styles */
+.wat-help-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.wat-help-modal {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.wat-help-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--card-border);
+  background: var(--toolbar-bg);
+}
+
+.wat-help-header h3 {
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.wat-help-close {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wat-help-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.wat-help-content {
+  padding: 1.5rem;
+  max-height: 60vh;
+  overflow-y: auto;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.wat-help-content p {
+  margin-bottom: 1rem;
+}
+
+.wat-help-content p:last-child {
+  margin-bottom: 0;
+}
+
+.wat-help-content code {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+}
+
+.wat-help-content pre {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1rem 0;
+  border: 1px solid var(--card-border);
+}
+
+.wat-help-content ul, .wat-help-content ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.wat-help-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive Help Modal */
+@media (max-width: 768px) {
+  .wat-help-modal {
+    width: 95%;
+    max-height: 85vh;
+  }
+  
+  .wat-help-header {
+    padding: 1rem;
+  }
+  
+  .wat-help-content {
+    padding: 1rem;
   }
 }
 

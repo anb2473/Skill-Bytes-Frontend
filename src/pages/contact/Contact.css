@@ -19,7 +19,7 @@
   padding: 2rem;
 }
 
-@keyframes spin {
+@keyframes spin-border {
   to {
     --angle: 360deg;
   }
@@ -74,7 +74,7 @@
 
 .profile-image-container:hover::before {
   display: block;
-  animation: spin 2s linear infinite;
+  animation: spin-border 2s linear infinite;
 }
 
 .profile-image-container:hover {

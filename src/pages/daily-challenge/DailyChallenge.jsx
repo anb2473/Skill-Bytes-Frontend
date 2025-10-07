@@ -8,7 +8,7 @@ import "prismjs/components/prism-javascript";
 import "prismjs/themes/prism.css"; // or another Prism theme
 
 // Import icons (you may need to install react-icons or use your preferred icon library)
-import { FaPlay, FaRedo, FaTerminal, FaCode, FaSpinner } from "react-icons/fa";
+import { FaPlay, FaRedo, FaTerminal, FaCode, FaSpinner, FaQuestionCircle } from "react-icons/fa";
 
 function DailyChallenge() {
   const highlight = (code) =>
@@ -40,6 +40,7 @@ result; // This will be displayed in the output`);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [functionName, setFunctionName] = useState("");
+  const [showHelp, setShowHelp] = useState(false);
 
   useEffect(() => {
     // If we have challenge data from navigation state, use it directly
@@ -71,6 +72,7 @@ result; // This will be displayed in the output`);
           points: challenge.points || "∞",
           content: challenge.content || "",
           tests: challenge.tests || [],
+          help: challenge.help || "",
         });
         setFunctionName(challenge.functionName || "");
         // Set the editor content to the challenge content
@@ -158,7 +160,7 @@ result; // This will be displayed in the output`);
           }
         }
 
-        ret = fetch(`${BACKEND_URL}/user/complete-daily-challenge`, {
+        ret = fetch(`${BACKEND_URL}/user/complete-challenge`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -225,6 +227,13 @@ result; // This will be displayed in the output`);
           </span>
           <div className="wat-buttons">
             <button 
+              onClick={() => setShowHelp(!showHelp)} 
+              className="wat-button wat-button-help"
+              disabled={isRunning}
+            >
+              <FaQuestionCircle className="wat-button-icon" /> Help
+            </button>
+            <button 
               onClick={resetCode} 
               className="wat-button wat-button-secondary"
               disabled={isRunning}
@@ -273,6 +282,30 @@ result; // This will be displayed in the output`);
           {output}
         </pre>
       </div>
+
+      {/* Help Modal */}
+      {showHelp && (
+        <div className="wat-help-overlay" onClick={() => setShowHelp(false)}>
+          <div className="wat-help-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="wat-help-header">
+              <h3>Challenge Help</h3>
+              <button 
+                className="wat-help-close"
+                onClick={() => setShowHelp(false)}
+              >
+                ×
+              </button>
+            </div>
+            <div className="wat-help-content">
+              {challenge.help ? (
+                <div dangerouslySetInnerHTML={{ __html: challenge.help }}></div>
+              ) : (
+                <p>No help information available for this challenge.</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
