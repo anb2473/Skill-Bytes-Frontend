@@ -11,45 +11,50 @@ const features = [
     title: "Daily Challenges",
     description: "With AI editors, many junior devs are forgetting how to program. With Daily Challenges, Skill Bytes helps you maintain and improve your programming skills through daily exercises that test your knowledge of data structures and algorithms. Compete on the daily leaderboard to see how you rank against other developers.",
     icon: "🏆",
-    color: "#6366f1"
+    color: "#6366f1",
+    status: "live now"
   },
   {
     title: "Skill Issues",
     description: "Skill Bytes allows developers to easily review each other's projects. Browse projects with 'Skill Issues' tags and provide constructive feedback to help fellow developers grow. It's a great way to learn from real-world code and contribute to the community.",
     icon: "🔍",
-    color: "#8b5cf6"
+    color: "#8b5cf6",
+    status: "coming soon"
   },
   {
     title: "Structured Learning",
     description: "Whether you're a beginner or looking to master advanced topics, Skill Bytes offers structured learning paths. Focus on specific subjects that interest you, from basic programming concepts to complex system design patterns.",
     icon: "📚",
-    color: "#ec4899"
+    color: "#ec4899",
+    status: "coming soon"
   },
   {
     title: "Byte Clubs",
     description: "Join or create Byte Clubs to connect with like-minded developers. Collaborate on projects, participate in coding challenges, and grow your network in specialized programming communities.",
     icon: "👥",
-    color: "#10b981"
+    color: "#10b981",
+    status: "coming soon"
   },
   {
     title: "Free DNS Hosting",
     description: "Showcase your projects with a professional touch. Skill Bytes offers free subdomains for your portfolio and project websites, making it easy to share your work with the world.",
     icon: "🌐",
-    color: "#3b82f6"
+    color: "#3b82f6",
+    status: "coming soon"
   }
 ];
 
 const languages = [
-  { name: "Python", icon: <FaPython />, color: "#3776AB" },
-  { name: "JavaScript", icon: <FaJs />, color: "#F7DF1E" },
-  { name: "TypeScript", icon: <SiTypescript />, color: "#3178C6" },
-  { name: "Java", icon: <FaJava />, color: "#007396" },
-  { name: "C++", icon: <SiCplusplus />, color: "#00599C" },
-  { name: "Rust", icon: <SiRust />, color: "#000000" },
-  { name: "Go", icon: <SiGo />, color: "#00ADD8" },
-  { name: "Ruby", icon: <SiRuby />, color: "#CC342D" },
-  { name: "Swift", icon: <SiSwift />, color: "#F05138" },
-  { name: "Kotlin", icon: <SiKotlin />, color: "#7F52FF" }
+  { name: "Python", icon: <FaPython />, color: "#3776AB", status: "coming soon" },
+  { name: "JavaScript", icon: <FaJs />, color: "#F7DF1E", status: "live now" },
+  { name: "TypeScript", icon: <SiTypescript />, color: "#3178C6", status: "coming soon" },
+  { name: "Java", icon: <FaJava />, color: "#007396", status: "coming soon" },
+  { name: "C++", icon: <SiCplusplus />, color: "#00599C", status: "coming soon" },
+  { name: "Rust", icon: <SiRust />, color: "#000000", status: "coming soon" },
+  { name: "Go", icon: <SiGo />, color: "#00ADD8", status: "coming soon" },
+  { name: "Ruby", icon: <SiRuby />, color: "#CC342D", status: "coming soon" },
+  { name: "Swift", icon: <SiSwift />, color: "#F05138", status: "coming soon" },
+  { name: "Kotlin", icon: <SiKotlin />, color: "#7F52FF", status: "coming soon" }
 ];
 
 const learningTopics = [
@@ -63,7 +68,7 @@ const learningTopics = [
   { name: "Blockchain", icon: "⛓️", color: "#000000" }
 ];
 
-const FeatureCard = ({ title, description, icon, color, index }) => {
+const FeatureCard = ({ title, description, icon, color, status, index }) => {
   const controls = useAnimation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -89,7 +94,14 @@ const FeatureCard = ({ title, description, icon, color, index }) => {
         <div className="feature-icon" style={{ backgroundColor: `${color}20`, color: color }}>
           <span style={{ fontSize: '2rem' }}>{icon}</span>
         </div>
-        <h2>{title}</h2>
+        <div className="feature-title-row">
+          <h2>{title}</h2>
+          {status && (
+            <span className={`status-badge ${status === 'live now' ? 'status-live' : 'status-soon'}`}>
+              {status}
+            </span>
+          )}
+        </div>
         <p>{description}</p>
       </div>
       <div className="feature-image">
@@ -118,6 +130,13 @@ const LanguageCard = ({ language }) => (
       {language.icon}
     </div>
     <h3>{language.name}</h3>
+    {language.status && (
+      <div className="language-badge-container">
+        <span className={`status-badge ${language.status === 'live now' ? 'status-live' : 'status-soon'}`}>
+          {language.status}
+        </span>
+      </div>
+    )}
   </motion.div>
 );
 
