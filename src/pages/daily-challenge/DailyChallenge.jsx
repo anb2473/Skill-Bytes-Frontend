@@ -105,7 +105,7 @@ result; // This will be displayed in the output`);
     setIsRunning(true);
     setOutput("Running...");
     
-    setTimeout(() => {
+    setTimeout(async () => {
       try {
         // Extract test function
         const fn = new Function(`
@@ -160,13 +160,13 @@ result; // This will be displayed in the output`);
           }
         }
 
-        ret = fetch(`${BACKEND_URL}/user/complete-challenge`, {
+        const ret = await fetch(`${BACKEND_URL}/user/complete-challenge`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           credentials: 'include', // Include cookies for authentication if needed
-          body: JSON.stringify({ challengeId: challenge.id, code: source })
+          body: JSON.stringify({ code: source, challengeId: challenge.id })
         })
         if (ret.ok) {
           setOutput(`✅ All tests passed! Great job!`);
