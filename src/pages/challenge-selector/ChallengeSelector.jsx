@@ -40,7 +40,7 @@ const ChallengeSelector = () => {
       }
       
       const data2 = await response2.json();
-      setSolvedChallenges(data2.solvedChallenges || []);
+      setSolvedChallenges(data2.completedChallenges || []);
     } catch (err) {
       console.error('Failed to fetch completed challenges:', err);
       setError('Failed to load your completed challenges. Please try again later.');
@@ -54,6 +54,7 @@ const ChallengeSelector = () => {
     navigate('/daily-challenge', { 
       state: { 
         challenge: {
+          id: challenge.id,
           title: challenge.title || "Failed to Load Daily Challenge",
           description: challenge.description || "We know this sucks, but we failed to load your daily challenge. Try again later! Also, please report this issue if it persists. Thanks! :)",
           difficulty: challenge.difficulty || "Impossible",
@@ -88,6 +89,7 @@ const ChallengeSelector = () => {
       navigate('/daily-challenge', { 
         state: { 
           challenge: {
+            id: challenge.id,
             title: challenge.title || "Failed to Load Daily Challenge",
             description: challenge.description || "We know this sucks, but we failed to load your daily challenge. Try again later! Also, please report this issue if it persists. Thanks! :)",
             difficulty: challenge.difficulty || "Impossible",

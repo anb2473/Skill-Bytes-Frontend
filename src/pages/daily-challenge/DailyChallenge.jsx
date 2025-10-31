@@ -66,6 +66,7 @@ result; // This will be displayed in the output`);
         const data = await response.json();
         const challenge = data.challenge;
         setChallenge({
+          id: challenge.id,
           title: challenge.title || "Failed to Load Daily Challenge",
           description: challenge.description || "We know this sucks, but we failed to load your daily challenge. Try again later! Also, please report this issue if it persists. Thanks! :)",
           difficulty: challenge.difficulty || "Impossible",
