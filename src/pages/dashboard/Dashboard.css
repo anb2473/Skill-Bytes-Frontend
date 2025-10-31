@@ -3,12 +3,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #111;
+  background: #000;
   padding: 2rem;
 }
 
 .dashboard-card {
-  background: linear-gradient(135deg, #222 60%, #000 100%);
+  background: #000;
   color: #fff;
   padding: 3rem 4rem;
   border-radius: 2rem;
@@ -16,6 +16,7 @@
   text-align: center;
   opacity: 0.95;
   animation: fadeIn 1.2s;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .dashboard-card h1 {
@@ -26,14 +27,14 @@
 
 .dashboard-card p {
   font-size: 1.25rem;
-  color: #ccc;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .challenge-card {
   position: relative;
-  background: #121212;
+  background: #000;
   color: #fff;
-  border: 1px solid #333;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   overflow: hidden;
@@ -52,9 +53,9 @@
 }
 
 .challenge-card.hovered {
-  background: #1a1a1a;
-  border-color: #6abf69;
-  box-shadow: 0 0 20px rgba(82, 168, 81, 0.2);
+  background: #0a0a0a;
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
 }
 
 .challenge-content {
@@ -89,7 +90,7 @@
 
 .challenge-content p {
   font-size: 1.2rem;
-  color: #b8c2d8;
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 2.5rem;
   line-height: 1.6;
   max-width: 90%;
@@ -199,7 +200,7 @@
   position: fixed;
   top: 80px;
   right: 20px;
-  background-color: rgba(30, 30, 30, 0.95);
+  background-color: rgba(0, 0, 0, 0.92);
   color: #fff;
   padding: 12px 40px 12px 16px;
   border-radius: 8px;
