@@ -12,7 +12,8 @@ const features = [
     description: "With AI editors, many junior devs are forgetting how to program. With Daily Challenges, Skill Bytes helps you maintain and improve your programming skills through daily exercises that test your knowledge of data structures and algorithms. Compete on the daily leaderboard to see how you rank against other developers.",
     icon: "🏆",
     color: "#6366f1",
-    status: "live now"
+    status: "live now",
+    media: { type: 'video', src: '/daily-challenge.mp4' }
   },
   {
     title: "Skill Issues",
@@ -68,7 +69,7 @@ const learningTopics = [
   { name: "Blockchain", icon: "⛓️", color: "#000000" }
 ];
 
-const FeatureCard = ({ title, description, icon, color, status, index }) => {
+const FeatureCard = ({ title, description, icon, color, status, media, index }) => {
   const controls = useAnimation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -106,13 +107,24 @@ const FeatureCard = ({ title, description, icon, color, status, index }) => {
       </div>
       <div className="feature-image">
         <div className="mockup-window">
-          <div className="mockup-content">
-            <div className="code-snippet">
-              <div className="code-line" style={{ width: '80%' }}></div>
-              <div className="code-line" style={{ width: '90%' }}></div>
-              <div className="code-line" style={{ width: '70%' }}></div>
-              <div className="code-line" style={{ width: '85%' }}></div>
-            </div>
+          <div className={`mockup-content ${media && media.type === 'video' ? 'mockup-content-media' : ''}`}>
+            {media && media.type === 'video' && media.src ? (
+              <video
+                src={media.src}
+                autoPlay
+                muted
+                loop
+                playsInline
+                style={{ width: '100%', borderRadius: '8px' }}
+              />
+            ) : (
+              <div className="code-snippet">
+                <div className="code-line" style={{ width: '80%' }}></div>
+                <div className="code-line" style={{ width: '90%' }}></div>
+                <div className="code-line" style={{ width: '70%' }}></div>
+                <div className="code-line" style={{ width: '85%' }}></div>
+              </div>
+            )}
           </div>
         </div>
       </div>
