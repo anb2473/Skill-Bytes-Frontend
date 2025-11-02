@@ -11,6 +11,7 @@ import OnboardingPrefLang from "./pages/onboarding-pref-lang/OnboardingPrefLang.
 import OnboardingPref from "./pages/onboarding-pref/OnboardingPref.jsx";
 import ChallengeSelector from "./pages/challenge-selector/ChallengeSelector.jsx";
 import DailyChallenge from "./pages/daily-challenge/DailyChallenge.jsx";
+import Leaderboard from "./pages/leaderboard/Leaderboard.jsx";
 import "./App.css";
 
 function App() {
@@ -78,6 +79,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/challenge-selector" element={<ChallengeSelector />} />
           <Route path="/daily-challenge" element={<DailyChallenge />}></Route>
+          <Route path="/leaderboard" element={<Leaderboard />}></Route>
         </Routes>
       </main>
     </div>

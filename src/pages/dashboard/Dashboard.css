@@ -96,6 +96,12 @@
   max-width: 90%;
 }
 
+.buttons-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 .start-button {
   align-self: flex-start;
   background: #3d8b40;
@@ -116,6 +122,7 @@
   background: #2d6e31;
   box-shadow: 0 6px 20px rgba(82, 168, 81, 0.3);
 }
+
 
 .challenge-image {
   flex: 1;
