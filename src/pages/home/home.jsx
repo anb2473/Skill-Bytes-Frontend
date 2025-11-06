@@ -71,7 +71,7 @@ function Home() {
             &times;
           </button>
           <span className="server-notification-icon">⚠️</span>
-          <span>Servers are currently in development. Launching soon - thanks for your patience!</span>
+          <span>We are currently looking for a hosting provider for our servers. Launching soon - thanks for your patience!</span>
         </div>
       )}
       <div className="home-root" ref={mountRef}>
