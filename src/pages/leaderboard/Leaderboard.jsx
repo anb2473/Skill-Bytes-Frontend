@@ -32,9 +32,9 @@ const Leaderboard = () => {
       
       // Find current user's rank (assuming there's a userId field in each entry or a separate currentUser field)
       // Adjust this based on your actual API response structure
-      if (data.currentUser) {
+      if (data.id) {
         const userIndex = data.leaderboard.findIndex(
-          entry => entry.username === data.currentUser.username || entry.userId === data.currentUser.id
+          entry => entry.id === data.id
         );
         setCurrentUserRank(userIndex !== -1 ? userIndex : null);
       }
@@ -99,10 +99,9 @@ const Leaderboard = () => {
                 >
                   <div className="rank-badge">{getRankEmoji(index)}</div>
                   <div className="user-info">
-                    <div className="username">{entry.username || entry.name || 'Anonymous'}</div>
+                    <div className="username">{entry.username || 'Anonymous'}</div>
                     <div className="stats">
-                      <span className="stat-item">📊 {entry.completedChallenges || entry.challengesCompleted || 0} challenges</span>
-                      <span className="stat-item">⭐ {entry.points || entry.totalPoints || 0} points</span>
+                      <span className="stat-item">⭐ {entry.points || 0} points</span>
                     </div>
                   </div>
                   {isCurrentUser && (

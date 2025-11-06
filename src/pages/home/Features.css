@@ -207,7 +207,6 @@
 .mockup-content {
   padding: 1.5rem;
   background: #1e1e1e;
-  min-height: 200px;
 }
 
 .mockup-content-media {
@@ -406,6 +405,13 @@
 
 /* Responsive Design */
 @media (max-width: 992px) {
+  
+  .status-badge {
+    padding: 0.25rem 0.75rem;
+    font-size: 1rem;
+    text-align: center;
+  }
+
   .feature {
     flex-direction: column;
     gap: 2rem;
