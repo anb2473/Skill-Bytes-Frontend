@@ -1,1 +1,1 @@
-export const BACKEND_URL = "/";      // local
+export const BACKEND_URL = "/";      // loopback
