@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Home from "./pages/home/home.jsx";
 import Contact from "./pages/contact/Contact.jsx";
@@ -13,10 +13,13 @@ import ChallengeSelector from "./pages/challenge-selector/ChallengeSelector.jsx"
 import DailyChallenge from "./pages/daily-challenge/DailyChallenge.jsx";
 import Leaderboard from "./pages/leaderboard/Leaderboard.jsx";
 import "./App.css";
+import { BACKEND_URL } from './pages/config.jsx';
 
 function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const location = useLocation();
+  const [isUserRoute, setIsUserRoute] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,8 +45,20 @@ function App() {
     }
   };
 
-  const isUserRoute = location.pathname.startsWith('/user');
+  const logout = async () => {
+    closeMobileMenu()
+    const response = await fetch(`${BACKEND_URL}/auth/logout`, {
+      credentials: 'include'
+    });
 
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} - ${response.statusText}`);
+    }
+  }
+
+  useEffect(() => {
+    setIsUserRoute(location.pathname.startsWith("/user"));
+  }, [location.pathname])
 
   return (
     <div>
@@ -73,7 +88,7 @@ function App() {
             <>
               <li><Link to="/user/dashboard" onClick={closeMobileMenu}>Dashboard</Link></li>
               <li><Link to="/user/challenge-selector" onClick={closeMobileMenu}>Challenge Selector</Link></li>
-              <li><Link to="/login" className="signup-link" onClick={closeMobileMenu}>Logout</Link></li>
+              <li><Link to="#" className="signup-link" onClick={logout}>Logout</Link></li>
             </>
           )}
         </ul>
