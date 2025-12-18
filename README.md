@@ -72,11 +72,3 @@ npm run preview
 
 **Contact / Author**
 - Repo owner: `anb2473` (see repository settings for contact).
-
-If you'd like, I can also:
-- add badges (build, license),
-- run the linter and fix minor issues automatically, or
-- update the `package.json` with a `start` script for convenience.
-
----
-Generated/updated README for local development and contributor orientation.
