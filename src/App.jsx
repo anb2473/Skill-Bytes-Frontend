@@ -48,7 +48,8 @@ function App() {
   const logout = async () => {
     closeMobileMenu()
     const response = await fetch(`${BACKEND_URL}/auth/logout`, {
-      credentials: 'include'
+      credentials: 'include',
+      method: 'DELETE'
     });
 
     if (!response.ok) {
@@ -88,7 +89,8 @@ function App() {
             <>
               <li><Link to="/user/dashboard" onClick={closeMobileMenu}>Dashboard</Link></li>
               <li><Link to="/user/challenge-selector" onClick={closeMobileMenu}>Challenge Selector</Link></li>
-              <li><Link to="#" className="signup-link" onClick={logout}>Logout</Link></li>
+              <li><Link to="/user/leaderboard" onClick={closeMobileMenu}>Leaderboard</Link></li>
+              <li><Link to="/login" className="signup-link" onClick={logout}>Logout</Link></li>
             </>
           )}
         </ul>
