@@ -73,7 +73,7 @@ const OnboardingPref = () => {
       }
 
       // Navigate to the dashboard after successful preferences save
-      navigate('/dashboard');
+      navigate('/user/dashboard');
     } catch (err) {
       console.error('Error saving preferences:', err);
       setError('An error occurred while saving your preferences');

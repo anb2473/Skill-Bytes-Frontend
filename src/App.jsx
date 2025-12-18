@@ -42,6 +42,9 @@ function App() {
     }
   };
 
+  const isUserRoute = location.pathname.startsWith('/user');
+
+
   return (
     <div>
       <nav className="navbar">
@@ -59,10 +62,20 @@ function App() {
         </div>
         
         <ul className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
-          <li><Link to="/" onClick={closeMobileMenu}>Home</Link></li>
-          <li><Link to="/contact" onClick={closeMobileMenu}>Contact</Link></li>
-          <li><Link to="/login" onClick={closeMobileMenu}>Log In</Link></li>
-          <li><Link to="/signup" className="signup-link" onClick={closeMobileMenu}>Get Started</Link></li>
+          {!isUserRoute ? (
+            <>
+              <li><Link to="/" onClick={closeMobileMenu}>Home</Link></li>
+              <li><Link to="/contact" onClick={closeMobileMenu}>Contact</Link></li>
+              <li><Link to="/login" onClick={closeMobileMenu}>Log In</Link></li>
+              <li><Link to="/signup" className="signup-link" onClick={closeMobileMenu}>Get Started</Link></li>
+            </>
+          ) : (
+            <>
+              <li><Link to="/user/dashboard" onClick={closeMobileMenu}>Dashboard</Link></li>
+              <li><Link to="/user/challenge-selector" onClick={closeMobileMenu}>Challenge Selector</Link></li>
+              <li><Link to="/login" className="signup-link" onClick={closeMobileMenu}>Logout</Link></li>
+            </>
+          )}
         </ul>
       </nav>
 
@@ -76,10 +89,10 @@ function App() {
           <Route path="/onboarding-username" element={<OnboardingUsername />} />
           <Route path="/onboarding-pref-lang" element={<OnboardingPrefLang />} />
           <Route path="/onboarding-pref" element={<OnboardingPref />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/challenge-selector" element={<ChallengeSelector />} />
-          <Route path="/daily-challenge" element={<DailyChallenge />}></Route>
-          <Route path="/leaderboard" element={<Leaderboard />}></Route>
+          <Route path="/user/dashboard" element={<Dashboard />} />
+          <Route path="/user/challenge-selector" element={<ChallengeSelector />} />
+          <Route path="/user/daily-challenge" element={<DailyChallenge />}></Route>
+          <Route path="/user/leaderboard" element={<Leaderboard />}></Route>
         </Routes>
       </main>
     </div>

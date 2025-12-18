@@ -48,7 +48,7 @@ const Login = () => {
       // The browser will automatically handle the cookie
       // Add a small delay to ensure cookie is set before redirect
       await new Promise(resolve => setTimeout(resolve, 100));
-      navigate('/dashboard'); // Redirect to dashboard
+      navigate('/user/dashboard'); // Redirect to dashboard
 
     } catch (err) {
       setError(err.message || 'An error occurred during login');

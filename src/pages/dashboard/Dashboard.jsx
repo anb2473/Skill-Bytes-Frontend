@@ -102,8 +102,8 @@ function Dashboard() {
                     <h2>Daily Challenge</h2>
                     <p>Test your skills with today's featured challenge</p>
                     <div className="buttons-container">
-                        <Link className="start-button" to="/challenge-selector">Start Challenge</Link>
-                        <Link className="start-button leaderboard-button" to="/leaderboard">🏆 View Leaderboard</Link>
+                        <Link className="start-button" to="/user/challenge-selector">Start Challenge</Link>
+                        <Link className="start-button leaderboard-button" to="/user/leaderboard">🏆 View Leaderboard</Link>
                     </div>
                 </div>
                 <div className="challenge-image">
