@@ -170,7 +170,7 @@
 
 .completed-challenge-card {
   background: linear-gradient(135deg, var(--input-bg) 0%, rgba(255, 255, 255, 0.02) 100%);
-  border: 1px solid var(--border);
+  border: 1px solid var(--success);
   border-radius: 12px;
   padding: 1.5rem;
   cursor: pointer;
