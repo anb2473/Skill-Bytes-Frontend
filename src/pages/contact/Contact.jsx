@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Contact.css';
 
 const Contact = () => {
@@ -11,14 +11,12 @@ const Contact = () => {
       <div className="contact-content">
         <div className="profile-section">
           <div className="profile-image-container">
-          <div className="profile-image-wrapper">
-            <img 
-              src="/profile.jpg" 
-              alt="" 
-              className="profile-image"
-            />
+            <div className="profile-image-wrapper" aria-busy={!false}>
+              {/* spinner visible while image is loading; fallback on error */}
+              {/** image load state handled below */}
+              <ImageWithLoader src="/profile.jpg" alt="Austin Blass" />
+            </div>
           </div>
-        </div>
           <h1>Austin Blass</h1>
           <p className="description">
             I started my journey in computer science three years ago in game development, 
@@ -43,6 +41,32 @@ const Contact = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+// Small helper component to handle image loading state within this file
+const ImageWithLoader = ({ src, alt }) => {
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
+
+  return (
+    <>
+      {!loaded && !error && <div className="image-spinner" aria-hidden="true" />}
+
+      {error ? (
+        <div className="image-fallback" role="img" aria-label={alt}>
+          AB
+        </div>
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          className={`profile-image ${loaded ? 'loaded' : 'loading'}`}
+          onLoad={() => setLoaded(true)}
+          onError={() => setError(true)}
+        />
+      )}
+    </>
   );
 };
 

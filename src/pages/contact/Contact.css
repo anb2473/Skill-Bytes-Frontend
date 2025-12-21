@@ -99,6 +99,53 @@
   transition: transform 0.3s ease;
 }
 
+/* Loading / spinner styles */
+.image-spinner {
+  position: absolute;
+  z-index: 5;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,0.12);
+  border-top-color: #ffffff;
+  animation: spin 1s linear infinite;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Image reveal transition */
+.profile-image.loading {
+  opacity: 0;
+  transform: scale(1.02);
+  filter: blur(4px) saturate(.9);
+}
+
+.profile-image.loaded {
+  opacity: 1;
+  transform: scale(1);
+  filter: none;
+  transition: opacity 300ms ease, transform 300ms ease, filter 300ms ease;
+}
+
+/* Fallback when image fails to load */
+.image-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg,#111,#000);
+  color: #fff;
+  font-weight: 700;
+  font-size: 2.4rem;
+}
+
 .profile-image-container:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
