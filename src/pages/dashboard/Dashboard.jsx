@@ -50,7 +50,7 @@ function Dashboard() {
             setInbox(prev => prev.filter((_, i) => i !== index));
         }
 
-        const response = await fetch(`${BACKEND_URL}/msg:${id}`, {
+        const response = await fetch(`${BACKEND_URL}/user/msg/${id}`, {
           method: 'DELETE',
           headers: {  
               'Content-Type': 'application/json',
