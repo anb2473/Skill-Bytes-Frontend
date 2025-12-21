@@ -51,7 +51,7 @@ const Login = () => {
       navigate('/user/dashboard'); // Redirect to dashboard
 
     } catch (err) {
-      setError(err.message || 'An error occurred during login');
+      setError('An error occurred during login');
       console.error('Login error:', err);
     } finally {
       setIsLoading(false);
