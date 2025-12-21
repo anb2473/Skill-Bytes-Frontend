@@ -51,7 +51,7 @@ const ChallengeSelector = () => {
 
   const handleChallengeSelect = (challenge) => {
     // Navigate to daily challenge page with the selected challenge data
-    navigate('/daily-challenge', { 
+    navigate('/user/daily-challenge', { 
       state: { 
         challenge: {
           id: challenge.id,
@@ -86,7 +86,7 @@ const ChallengeSelector = () => {
       const challenge = data.challenge;
       
       // Navigate to daily challenge page with the new challenge data
-      navigate('/daily-challenge', { 
+      navigate('/user/daily-challenge', { 
         state: { 
           challenge: {
             id: challenge.id,
