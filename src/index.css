@@ -25,3 +25,8 @@ body {
   background: var(--bg);
   color: var(--text);
 }
+
+/* Make sure root fills viewport so pages use full-screen space consistently */
+#root, html {
+  height: 100%;
+}
