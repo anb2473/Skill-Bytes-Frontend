@@ -107,9 +107,9 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className="challenge-image">
-                    <img 
-                        src="/daily-challenge.png" 
-                        alt="Daily Challenge" 
+                    <ImageWithLoader
+                        src="/daily-challenge.png"
+                        alt="Daily Challenge"
                         className={isHovered ? 'image-hover' : ''}
                     />
                 </div>
@@ -124,3 +124,29 @@ function Dashboard() {
 };
 
 export default Dashboard;
+
+// Reusable small image loader component (kept in this file for simplicity)
+function ImageWithLoader({ src, alt, className = '' }) {
+    const [loaded, setLoaded] = useState(false);
+    const [error, setError] = useState(false);
+
+    return (
+        <>
+            {!loaded && !error && <div className="image-spinner" aria-hidden="true" />}
+
+            {error ? (
+                <div className="image-fallback" role="img" aria-label={alt}>
+                    ❓
+                </div>
+            ) : (
+                <img
+                    src={src}
+                    alt={alt}
+                    className={`${className} ${loaded ? 'loaded' : 'loading'}`.trim()}
+                    onLoad={() => setLoaded(true)}
+                    onError={() => setError(true)}
+                />
+            )}
+        </>
+    );
+}

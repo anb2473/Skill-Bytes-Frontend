@@ -142,6 +142,54 @@
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
 }
 
+/* Image loading spinner and transitions */
+.challenge-image { position: relative; }
+.image-spinner {
+  position: absolute;
+  z-index: 5;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,0.12);
+  border-top-color: #ffffff;
+  animation: spin 1s linear infinite;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* reveal/blur transition while loading */
+.challenge-image img.loading {
+  opacity: 0;
+  transform: scale(1.02);
+  filter: blur(6px) saturate(.9);
+}
+
+.challenge-image img.loaded {
+  opacity: 1;
+  transform: scale(1);
+  filter: none;
+  transition: opacity 350ms ease, transform 350ms ease, filter 350ms ease;
+}
+
+/* fallback for image error */
+.image-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg,#0b0b0b,#000);
+  color: #fff;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
 .challenge-card:hover .challenge-image img {
   transform: scale(1.05);
 }
