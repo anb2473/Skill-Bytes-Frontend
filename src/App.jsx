@@ -65,7 +65,7 @@ function App() {
     <div>
       <nav className="navbar">
         <Link to="/" className="logo" onClick={closeMobileMenu}>
-          <img src="/icon-large.png" alt="Skill Bytes Logo" />
+          <img src="/icon-large.jpeg" alt="Skill Bytes Logo" />
         </Link>
         
         <div 
