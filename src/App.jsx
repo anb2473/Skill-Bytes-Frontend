@@ -12,6 +12,7 @@ import OnboardingPref from "./pages/onboarding-pref/OnboardingPref.jsx";
 import ChallengeSelector from "./pages/challenge-selector/ChallengeSelector.jsx";
 import DailyChallenge from "./pages/daily-challenge/DailyChallenge.jsx";
 import Leaderboard from "./pages/leaderboard/Leaderboard.jsx";
+import Preferences from "./pages/preferences/Preferences.jsx";
 import "./App.css";
 import { BACKEND_URL } from './pages/config.jsx';
 
@@ -90,6 +91,7 @@ function App() {
               <li><Link to="/user/dashboard" onClick={closeMobileMenu}>Dashboard</Link></li>
               <li><Link to="/user/challenge-selector" onClick={closeMobileMenu}>Challenge Selector</Link></li>
               <li><Link to="/user/leaderboard" onClick={closeMobileMenu}>Leaderboard</Link></li>
+              <li><Link to="/user/preferences" onClick={closeMobileMenu}>Preferences</Link></li>
               <li><Link to="/login" className="signup-link" onClick={logout}>Logout</Link></li>
             </>
           )}
@@ -110,6 +112,7 @@ function App() {
           <Route path="/user/challenge-selector" element={<ChallengeSelector />} />
           <Route path="/user/daily-challenge" element={<DailyChallenge />}></Route>
           <Route path="/user/leaderboard" element={<Leaderboard />}></Route>
+          <Route path="/user/preferences" element={<Preferences />}></Route>
         </Routes>
       </main>
     </div>
