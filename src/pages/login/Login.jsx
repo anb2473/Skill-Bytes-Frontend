@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import "./Login.css";
 import { BACKEND_URL } from "../config";
 
@@ -19,6 +19,7 @@ const Login = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [searchParams] = useSearchParams();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,7 +57,7 @@ const Login = () => {
       // The browser will automatically handle the cookie
       // Add a small delay to ensure cookie is set before redirect
       await new Promise((resolve) => setTimeout(resolve, 100));
-      navigate("/user/dashboard"); // Redirect to dashboard
+      navigate(searchParams.get('redirect') || "/user/dashboard"); // Redirect to dashboard
     } catch (err) {
       if (err instanceof APIError) {
         setError(err.message);

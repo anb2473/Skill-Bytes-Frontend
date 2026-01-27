@@ -1,5 +1,6 @@
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import ChangeEmail from "./pages/change-email/ChangeEmail.jsx"
 import Home from "./pages/home/home.jsx";
 import Contact from "./pages/contact/Contact.jsx";
 import SignUp from "./pages/signup/SignUp.jsx";
@@ -104,6 +105,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/change-email" element={<ChangeEmail />} />
           <Route path="/onboarding-name" element={<OnboardingName />} />
           <Route path="/onboarding-username" element={<OnboardingUsername />} />
           <Route path="/onboarding-pref-lang" element={<OnboardingPrefLang />} />
